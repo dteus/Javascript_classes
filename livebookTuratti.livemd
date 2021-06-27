@@ -1,0 +1,168 @@
+# JavaScriptTuratti
+
+## Chapter 5 Higher Order Functions
+
+O javascript entende uma função como um valor e por isso uma função pode conter como argumento uma segunda função ou conter como return uma outra função.
+
+Esse tipo de função é usado primariamente para deixar o código menor e mais legível, pois por diminuir seu tamanho a chance de se perder ou de encontrar algum bug em seu percalço, como erro em loops e contadores.
+
+```elixir
+
+let total = 0, count = 1;
+while (count <= 10) {
+  total += count;
+  count += 1;
+}
+console.log(total);
+```
+
+```elixir
+console.log(sum(range(1, 10)))
+```
+
+Para botarmos em prática:
+
+Vamos fazer uma Higher-Order Function que tenha como um argumento uma função, primeiro precisamos criar um arquivo HTML simples para termos acesso de fácil acesso durante a aula.
+
+```elixir
+<!DOCTYPE html>
+<html Lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Aulinha do Dteus</title>
+</head>
+<body>
+  <h1>Higher-order Functions</h1>
+
+  <script src="./Exercicios.js"></script>
+</body>
+</html>
+```
+
+Agora criamos um segundo arquivo em JavaScript que contenha uma função que é alimentada por outra função.
+
+```elixir
+document.addEventListener("click", handleDocumentClick)
+
+function handleDocumentClick () {
+  console.log ('Clicou no documento')
+}
+```
+
+Higher Order Functions são excelentes para processamento de dados, pois nos permite ter uma visão mais abstrata sobre nossos comandos, essas ações mais abstratas são denominadas pelos comandos **.map()**, **.filter()** e **.reduce()**.
+
+Existem outras maneiras de construir uma higher-order function que contém como ferramenta principal o for/of por exemplo:
+
+```elixir
+["A", "B"].forEach(l => console.log(l));
+// -> A
+// -> B
+```
+
+O primeiro comando que veremos será o **.map()**, usado para transformar uma array em outra em que se modificam todos os dados contidos nela e para fazer isso ela aplica a **function** em cada um dos seus elementos de cada vez. O **return** desse tipo de função sempre terá o mesmo comprimento da original e por padrão sempre se inicia no elemento zero da array (a não ser que seja informado o chamado da função).
+
+Para entendermos melhor como funciona o **.map()** vamos fazer um exercício rápido:
+
+```elixir
+let(numbers = [1, 2, 3])
+```
+
+Nos temos uma array que contem os números 1, 2 e 3 e queremos elevar eles a segunda potência, como podemos fazer isso usando o **.map()**?
+
+Primeiro montamos o escopo da nossa função, chamado a variável e o comando .map, nele temos o elemento da array e a seguir temos o inicio da função dentro da função definida pela arrow function "=>":
+
+```elixir
+numbers.map (item => {})
+```
+
+Agora com o escopo feito podemos criar nossa segunda array de números elevados a segunda potência:
+
+```elixir
+let numbers = [1,2,3]
+console.log (numbers.map(item => item ** 2))
+```
+
+Exercício .map()
+
+Tendo em mãos array dos seguintes objetos e queremos listar apenas o nome dessas séries.
+
+```elixir
+let tvShows = [
+    name: 'Breaking Bad', releaseYear: 2008}, 
+    name: 'Mr. Robot', releaseYear: 2015},
+    name: "True Detective", releaseYear: 2014},
+    name: 'Hannibal', releaseYear: 2013},
+    name: 'House M.D.', releaseYear: 2004},
+    name: 'Watchmen', releaseYear: 2019}
+  ]
+```
+
+O segundo comando que veremos é o comando **.filter()**, esse tipo de função recebe uma função como argumento e uma condição resultando em uma array que apena contém os valores que passaram pela condição pré estabelecida.
+
+Para chamar uma função **.filter()** podemos escrever:
+
+```elixir
+var.filter(item,index,array => condição)
+```
+
+Notem que no exemplo acima é informado o item, index e array.
+
+**item**: intem do array que está sendo avaliado
+
+**index**: posição do item a ser avaliado
+
+**array**: indica qual é a array a ser avaliada
+
+Apenas o item precisa ser obrigatóriamente informado.
+
+Vejamos agora um exemplo com mais detalhes:
+
+```elixir
+let randomNumbers = [36, 99, 37, 63]
+
+let numbersGreaterThan37 = randomNumbers.filter(item => item > 37)
+```
+
+Exercício **.filter()**:
+
+Dada a lista de series e seus respectivos anos de lançamento, precisamos filtra-la para apenas mostrar séries lançadas a partir de 2010.
+
+```elixir
+let tvShows = [
+  name: 'Breaking Bad', releaseYear: 2008}, 
+  name: 'Mr. Robot', releaseYear: 2015},
+  name: "True Detective", releaseYear: 2014},
+  name: 'Hannibal', releaseYear: 2013},
+  name: 'House M.D.', releaseYear: 2004},
+  name: 'Watchmen', releaseYear: 2019}
+]
+```
+
+O útlimo comando de higher-order function é o **.reduce()** serve para reduzir a array em um valor único, que pode ou não ser uma array e por esse motivo ele é extremamente útil para produzir resultados que sejam valores que não são arrays.
+
+Vejamos agora como é o escopo de uma função do tipo reduce:
+
+```elixir
+var.reduce ((accumulator, item) => accumulator + item, 0)
+```
+
+Nesse exemplo podemos ver que a função é alimentada por um valor de accumulator, item e o valor "0" onde:
+
+**item**: intem do array que está sendo avaliado
+
+**"0"**: indica qual é o valor incial não contido explicitamente na array.
+
+**accumulator**: tem valor inicial igual ao indicado pelo "0" e posteriormente reserva o valor acumulado do loop anterior.
+
+Exercício **.reduce()**:
+
+Dada a lista de pessoas e suas informações é necessário produzir um retorno que indique quantas pessoas possuem a mesma idade.
+
+```elixir
+  {id: 5, name: 'Angelica', age: 18}, 
+  {id: 81, name: 'Thales', age: 19},
+  {id: 47, name: 'Ana Carolina', age: 18}, 
+  {id: 5, name: 'Felipe', age: 18}, 
+  {id: 5, name: 'Gabriel', age: 20}, 
+  {id: 5, name: 'Aline', age: 19}, 
+```
